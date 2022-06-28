@@ -1,0 +1,25 @@
+{
+    "version": "London",
+    "station_types": ["square", "circle", "triangle", "hexagone", "joker"], //Le type des stations
+    "stations": [
+        /*{ Exemple d'objet station
+            id: 0, // id unique entre 0 et ...
+            type: "square", //le type de la station
+            tourist: true, //bool pour savoir si c'est un site touristique
+            zone: 0, (0-12) //le numéro du quartier de la station entre 0 et 12
+            row: 0, // le numéro de ligne de la station entre 0 et  9 
+            col:0, // le numéro de colonne de la station entre 0 et  9
+        }*/
+    ],
+    "station_depart": [0,0,0,0], //les ids des stations de départ des 4 couleurs
+    "links": [
+        /* Exemple d'objet pour un lien entre deux stations
+        {
+            id: 0, \\id unique du lien entre 0 et ...
+            stations_id: [0,0], \\id des stations concernées
+            tamise: true, \\vrai si traverse la tamise
+            crossing: [0,...] \\liste des ids des liens croisés
+        }
+        */
+    ]
+}
