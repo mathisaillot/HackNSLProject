@@ -5,7 +5,6 @@
 #ifndef HACKNSLPROJECT_CONNEXION_H
 #define HACKNSLPROJECT_CONNEXION_H
 
-
 #include <Station.h>
 #include <json/json.h>
 #include <vector>
@@ -18,9 +17,12 @@ protected:
     int id_;
     bool tamise_;
     int stations_id[2];
+    string concat_id_;
     vector<int> crossings;
 
 public:
+
+    Connexion(const Value & json_data, vector<Station> & stations);
 
     inline int getId() const {
         return id_;

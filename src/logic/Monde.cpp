@@ -21,11 +21,18 @@ Monde::Monde() {
     reader.parse(ifs, obj);
 
     /// Parcours JSON
-    auto station_array = obj["stations"];
+    auto & station_array = obj["stations"];
     ArrayIndex size = station_array.size();
 
     for (ArrayIndex i = 0; i < size; ++i) {
         liste_stations.emplace_back(station_array[i]);
+    }
+
+    auto & json_connexions = obj["connections"];
+    size = json_connexions.size();
+
+    for (ArrayIndex i = 0; i < size; ++i) {
+        liste_connexions.emplace_back(json_connexions[i], liste_stations);
     }
 
 }

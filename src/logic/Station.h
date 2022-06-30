@@ -19,6 +19,7 @@ protected:
     int int_id, zone_, row_, col_;
     bool tourist_;
     StationType type_;
+    vector<int> liste_connexions;
 
 public:
 
@@ -43,6 +44,8 @@ public:
     static string toString(const Station &station);
 
     operator string() const;
+
+    void addConnexion(int connexion_id);
 
     friend ostream &operator<<(ostream &os, const Station &station) {
         return os << (string) station;

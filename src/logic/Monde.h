@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <Station.h>
+#include <Connexion.h>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class Monde {
 
 protected:
     vector<Station> liste_stations;
+    vector<Connexion> liste_connexions;
 
 public:
 

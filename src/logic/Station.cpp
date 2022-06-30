@@ -64,4 +64,8 @@ Station::operator string() const {
     return Station::toString(*this);
 }
 
+void Station::addConnexion(int connexion_id) {
+    liste_connexions.push_back(connexion_id);
+}
+
 
