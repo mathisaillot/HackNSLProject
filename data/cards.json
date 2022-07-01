@@ -1,0 +1,49 @@
+{
+    "blue": [
+        "deviation",
+        "under_joker",
+        "under_triangle",
+        "over_pentagon",
+        "over_triangle",
+        "under_pentagon",
+        "under_square",
+        "over_circle",
+        "under_circle"
+    ],
+    "pink": [
+        "under_circle",
+        "deviation",
+        "under_triangle",
+        "under_joker",
+        "under_pentagon",
+        "over_joker",
+        "over_pentagon",
+        "over_triangle",
+        "over_circle",
+        "under_square"
+    ],
+    "green": [
+        "under_pentagon",
+        "deviation",
+        "over_joker",
+        "under_joker",
+        "under_circle",
+        "over_circle",
+        "under_triangle",
+        "over_triangle",
+        "over_pentagon",
+        "under_square"
+    ],
+    "purple": [
+        "under_joker",
+        "under_pentagon",
+        "over_pentagon",
+        "under_square",
+        "over_square",
+        "over_triangle",
+        "under_triangle",
+        "over_joker",
+        "deviation",
+        "under_circle"
+    ]
+}
