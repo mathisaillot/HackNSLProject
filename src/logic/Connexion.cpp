@@ -23,3 +23,11 @@ Connexion::Connexion(const Value &json_data, vector<Station> &stations) {
     }
 
 }
+
+const string &Connexion::getConcatId() const {
+    return concat_id_;
+}
+
+Connexion::~Connexion() {
+
+}

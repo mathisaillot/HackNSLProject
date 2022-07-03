@@ -8,6 +8,8 @@
 #include <string>
 #include <StationType.h>
 #include <json/json.h>
+#include <AbstractVisitor.h>
+#include <FenetreMonde.h>
 
 using namespace std;
 using namespace Json;
@@ -24,6 +26,8 @@ protected:
 public:
 
     explicit Station(const Value & json_input);
+
+    virtual ~Station();
 
     const string &getId() const;
 
@@ -43,13 +47,16 @@ public:
 
     static string toString(const Station &station);
 
-    operator string() const;
+    explicit operator string() const;
 
     void addConnexion(int connexion_id);
 
     friend ostream &operator<<(ostream &os, const Station &station) {
         return os << (string) station;
     }
+
+    DECLAREVISITMETHOD(Station)
+
 };
 
 

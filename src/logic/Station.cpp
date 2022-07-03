@@ -68,4 +68,6 @@ void Station::addConnexion(int connexion_id) {
     liste_connexions.push_back(connexion_id);
 }
 
+Station::~Station() {
 
+}

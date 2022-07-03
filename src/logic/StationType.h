@@ -14,7 +14,7 @@ enum StationType {
     JOKER = 0,
     CIRCLE = 1,
     TRIANGLE = 2,
-    HEXAGONE = 3,
+    PENTAGONE = 3,
     SQUARE = 4,
     NDIFFERENTTYPES = 5
 };
@@ -27,7 +27,7 @@ protected:
 
     static void initDico()  {
         for (int i = 0; i < NDIFFERENTTYPES; ++i) {
-            dico[list_names[i]] = (StationType)i;
+            dico[list_names[i]] = (StationType)(i);
         }
     }
 public:

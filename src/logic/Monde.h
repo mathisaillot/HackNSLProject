@@ -9,6 +9,8 @@
 #include <string>
 #include <Station.h>
 #include <Connexion.h>
+#include <FenetreMonde.h>
+#include <AbstractVisitor.h>
 
 using namespace std;
 
@@ -22,9 +24,21 @@ public:
 
     Monde();
 
+    virtual ~Monde();
+
     inline const vector<Station> & getListeStations() const {
         return liste_stations;
     }
+
+    inline const vector<Connexion> & getListeConnexions() const {
+        return liste_connexions;
+    }
+
+    inline unsigned long getNumberStation() const { return liste_stations.size(); }
+
+    inline unsigned long getNumberConnexion() const { return liste_connexions.size(); }
+
+    DECLAREVISITMETHOD(Monde)
 
 };
 

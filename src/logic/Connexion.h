@@ -8,6 +8,7 @@
 #include <Station.h>
 #include <json/json.h>
 #include <vector>
+#include <AbstractVisitor.h>
 
 using namespace std;
 using namespace Json;
@@ -24,6 +25,8 @@ public:
 
     Connexion(const Value & json_data, vector<Station> & stations);
 
+    virtual ~Connexion();
+
     inline int getId() const {
         return id_;
     }
@@ -39,6 +42,10 @@ public:
     inline const vector<int> &getCrossings() const {
         return crossings;
     }
+
+    const string &getConcatId() const;
+
+    DECLAREVISITMETHOD(Connexion)
 
 };
 

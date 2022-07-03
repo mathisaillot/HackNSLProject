@@ -7,7 +7,7 @@
 map<string, StationType> StationTypeParseur::dico;
 
 string StationTypeParseur::list_names[NDIFFERENTTYPES] = {
-        "joker", "circle", "triangle", "hexagone", "square"
+        "joker", "circle", "triangle", "pentagon", "square"
 };
 
 bool StationTypeParseur::init = false;
