@@ -44,14 +44,7 @@ int main() {
 
     monde.visit(&dessinateurMonde);
 
-    char ch;
-
-    cin >> ch;
-
-    fenetre->ferme();
-
-    for (auto & station : liste_stations) {
-        cout << station << endl;
-    }
+    fenetre->listen();
+    delete fenetre;
     return 0;
 }
