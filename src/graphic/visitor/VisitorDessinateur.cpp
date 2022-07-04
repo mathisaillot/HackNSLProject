@@ -85,8 +85,13 @@ void VisitorDessinateurStation::dessinePolygone(const Vecteur2D<double> &center,
 void VisitorDessinateurConnexion::accept(const Connexion &obj) const {
     Vecteur2D<double> p1(stoi(obj.getConcatId().substr(1, 1)), -stoi(obj.getConcatId().substr(0, 1)));
     Vecteur2D<double> p2(stoi(obj.getConcatId().substr(3, 1)), -stoi(obj.getConcatId().substr(2, 1)));
-    fenetre->dessineSegment(p1, p2, couleur_segment);
+    fenetre->dessineSegment(p1, p2, couleur_segment, epaisseur_segment);
 }
+
+VisitorDessinateurConnexion::VisitorDessinateurConnexion(FenetreMonde *fenetre, const Couleur &couleurSegment,
+                                                         int epaisseurSegment) : fenetre(fenetre),
+                                                                                 couleur_segment(couleurSegment),
+                                                                                 epaisseur_segment(epaisseurSegment) {}
 
 VisitorDessinateurMonde::VisitorDessinateurMonde(FenetreMonde *fenetre, AbstractVisitor<Station> *dessinateurStation,
                                                  AbstractVisitor<Connexion> *dessinateurConnexion) : fenetre(fenetre),
@@ -165,4 +170,9 @@ void VisitorDessinateurMonde::accept(const Monde &obj) const {
     for (auto &st: obj.getListeStations()) {
         st.visit(dessinateurStation);
     }
+}
+
+VisitorDessinateurMonde::~VisitorDessinateurMonde() {
+ delete dessinateurConnexion;
+ delete dessinateurStation;
 }

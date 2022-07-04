@@ -11,25 +11,26 @@
 
 using namespace std;
 
-class Couleur
-{
-string couleur;
+class Couleur {
+    string couleur;
 public:
 
 //---------------- quelques belles couleurs en composantes RGB -----------------------------
 
-static const  string  VERT_CLAIR;
-static const  string BLEU_CLAIR;
-static const  string MAUVE_CLAIR;
-static const  string JAUNE_CLAIR;
-static const  string TURQUOISE;
+    static const string VERT_CLAIR;
+    static const string BLEU_CLAIR;
+    static const string MAUVE_CLAIR;
+    static const string JAUNE_CLAIR;
+    static const string TURQUOISE;
 
 
-explicit Couleur(const string & couleur);
-explicit operator string() const;
-static const string toString(const Couleur & couleur);
+    explicit Couleur(string couleur);
+
+    explicit operator string() const;
+
+    static const string toString(const Couleur &couleur);
 };
 
-ostream & operator << (ostream & os, const Couleur & couleur);
+ostream &operator<<(ostream &os, const Couleur &couleur);
 
 #endif /* COULEUR_H_ */

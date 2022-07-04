@@ -4,6 +4,7 @@
 #include "Vecteur2D.h"
 #include "dessinateur_java/DessinateurMondeAWTJAVA.h"
 #include "visitor/VisitorDessinateur.h"
+#include <VisitorDessinateurFactory.h>
 
 #ifndef ADRESSESERVEURDEFAUT
 #define ADRESSESERVEURDEFAUT "127.0.0.1"
@@ -38,9 +39,11 @@ int main() {
 
     auto fenetre = lanceApplicationParDefaut();
 
-    VisitorDessinateurStation dessinateurStation(fenetre);
-    VisitorDessinateurConnexion dessinateurConnexion(fenetre);
-    VisitorDessinateurMonde dessinateurMonde(fenetre, &dessinateurStation, &dessinateurConnexion);
+    auto factory = VisitorDessinateurFactory(fenetre);
+
+    VisitorDessinateurMonde dessinateurMonde(fenetre,
+                                             factory.getVisitorStationDefault(),
+                                             factory.getVisitorConnexionTamise());
 
     monde.visit(&dessinateurMonde);
 

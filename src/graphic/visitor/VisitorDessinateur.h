@@ -16,8 +16,8 @@ protected:
     FenetreMonde * fenetre;
     double rayon_outer_circle, scale = 0.13;
     int epaisseur_inner = 3;
-    const Couleur & couleur_outer_circle;
-    const Couleur & couleur_inner;
+    const Couleur couleur_outer_circle;
+    const Couleur couleur_inner;
 
     static Vecteur2D<double> pentagone_corners[5];
     static Vecteur2D<double> square_corners[4];
@@ -46,11 +46,10 @@ public:
 class  VisitorDessinateurConnexion : public AbstractVisitor<Connexion> {
 protected:
     FenetreMonde * fenetre;
-    const Couleur & couleur_segment;
+    const Couleur couleur_segment;
+    int epaisseur_segment;
 public:
-    explicit VisitorDessinateurConnexion(FenetreMonde *fenetre, const Couleur &couleurSegment = (Couleur)"Black") : fenetre(fenetre),
-                                                                                        couleur_segment(
-                                                                                                couleurSegment) {}
+    VisitorDessinateurConnexion(FenetreMonde *fenetre, const Couleur &couleurSegment, int epaisseurSegment);
 
     void accept(const Connexion &obj) const override;
 };
@@ -61,6 +60,9 @@ protected:
     AbstractVisitor<Station> * dessinateurStation;
     AbstractVisitor<Connexion> * dessinateurConnexion;
 public:
+
+    ~VisitorDessinateurMonde() override;
+
     VisitorDessinateurMonde(FenetreMonde *fenetre, AbstractVisitor<Station> *dessinateurStation,
                             AbstractVisitor<Connexion> *dessinateurConnexion);
 

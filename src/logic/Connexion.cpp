@@ -28,6 +28,4 @@ const string &Connexion::getConcatId() const {
     return concat_id_;
 }
 
-Connexion::~Connexion() {
-
-}
+Connexion::~Connexion() = default;
