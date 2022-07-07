@@ -1,10 +1,11 @@
 #include <iostream>
 
 #include <Monde.h>
-#include "Vecteur2D.h"
-#include "dessinateur_java/DessinateurMondeAWTJAVA.h"
-#include "visitor/VisitorDessinateur.h"
 #include <VisitorDessinateurFactory.h>
+#include <JsonLoader.hpp>
+#include <OutilsFichiers.h>
+#include <GameInstance.h>
+#include <DessinateurMondeAWTJAVA.h>
 
 #ifndef ADRESSESERVEURDEFAUT
 #define ADRESSESERVEURDEFAUT "127.0.0.1"
@@ -34,6 +35,21 @@ FenetreMonde * lanceApplicationParDefaut(const char *titre = "Application Graphi
 }
 
 int main() {
+
+    string file = getCheminDossierFils(getCheminDossierData(), "cards.json");
+
+    JsonLoader loader(file);
+
+    auto & json = loader.getData();
+
+    GameInstance instance(json);
+
+    auto deck_pink = instance.getDeck(PINK);
+
+    for (auto & card: deck_pink) {
+        cout << card << endl;
+    }
+
     Monde monde;
     auto & liste_stations = monde.getListeStations();
 

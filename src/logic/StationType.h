@@ -29,6 +29,7 @@ protected:
         for (int i = 0; i < NDIFFERENTTYPES; ++i) {
             dico[list_names[i]] = (StationType)(i);
         }
+        init = true;
     }
 public:
     static StationType getTypeFromString(const string & name) {

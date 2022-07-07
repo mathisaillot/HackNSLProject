@@ -7,7 +7,7 @@
 
 #include <string>
 #include <StationType.h>
-#include <json/json.h>
+#include <JsonLoader.hpp>
 #include <AbstractVisitor.h>
 #include <FenetreMonde.h>
 

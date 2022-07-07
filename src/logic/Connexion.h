@@ -6,7 +6,7 @@
 #define HACKNSLPROJECT_CONNEXION_H
 
 #include <Station.h>
-#include <json/json.h>
+#include <JsonLoader.hpp>
 #include <vector>
 #include <AbstractVisitor.h>
 

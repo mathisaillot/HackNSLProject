@@ -42,7 +42,7 @@ inline string getCheminDossierFils(const string & cheminRacine, const string & n
  * @param nomsFils la liste des noms des dossiers fils
  * @return le chemin vers le dossier fils le plus profond
  */
-string getCheminDossierFils(const string & cheminRacine, initializer_list<const string> nomsFils) {
+inline string getCheminDossierFils(const string & cheminRacine, initializer_list<const string> nomsFils) {
     string chemin = cheminRacine;
     for( const auto& fils : nomsFils )
     {
