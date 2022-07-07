@@ -36,7 +36,7 @@ FenetreMonde * lanceApplicationParDefaut(const char *titre = "Application Graphi
 
 int main() {
 
-    string file = getCheminDossierFils(getCheminDossierData(), "cards.json");
+    string file = getCheminDossierFils(getCheminDossierData(),{"gameinstance", "exemple_instance.json"});
 
     JsonLoader loader(file);
 
@@ -44,11 +44,7 @@ int main() {
 
     GameInstance instance(json);
 
-    auto deck_pink = instance.getDeck(PINK);
-
-    for (auto & card: deck_pink) {
-        cout << card << endl;
-    }
+    cout << instance << endl;
 
     Monde monde;
     auto & liste_stations = monde.getListeStations();

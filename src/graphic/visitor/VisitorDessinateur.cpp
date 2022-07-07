@@ -31,6 +31,10 @@ void VisitorDessinateurStation::accept(const Station &obj) const {
     auto position = getCenterPosition(obj);
     fenetre->dessineDisque(position, rayon_outer_circle, couleur_outer_circle);
 
+    if (obj.isTourist()) {
+        fenetre->dessineCercle(position, rayon_tourist, couleur_outer_circle);
+    }
+
     switch (obj.getType()) {
         case SQUARE:
             dessineSquare(position);

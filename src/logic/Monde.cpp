@@ -37,8 +37,4 @@ Monde::Monde() {
 
 }
 
-Monde::~Monde() {
-
-}
-
-
+Monde::~Monde() = default;

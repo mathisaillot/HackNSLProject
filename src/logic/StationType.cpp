@@ -4,10 +4,6 @@
 
 #include "StationType.h"
 
-map<string, StationType> StationTypeParseur::dico;
-
-string StationTypeParseur::list_names[NDIFFERENTTYPES] = {
-        "joker", "circle", "triangle", "pentagon", "square"
-};
-
-bool StationTypeParseur::init = false;
+ENUMBUILDERCPP(StationType,
+               "joker" VIRGULE "circle" VIRGULE "triangle" VIRGULE "pentagon" VIRGULE "square",
+               STATIONTYPESNUMBER)

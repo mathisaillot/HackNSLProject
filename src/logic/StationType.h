@@ -7,40 +7,18 @@
 
 #include <map>
 #include <string>
+#include <OutilsEnum.h>
 
 using namespace std;
 
-enum StationType {
-    JOKER = 0,
-    CIRCLE = 1,
-    TRIANGLE = 2,
-    PENTAGONE = 3,
-    SQUARE = 4,
-    NDIFFERENTTYPES = 5
-};
-
-class StationTypeParseur {
-protected:
-    static map<string, StationType> dico;
-    static string list_names[NDIFFERENTTYPES];
-    static bool init;
-
-    static void initDico()  {
-        for (int i = 0; i < NDIFFERENTTYPES; ++i) {
-            dico[list_names[i]] = (StationType)(i);
-        }
-        init = true;
-    }
-public:
-    static StationType getTypeFromString(const string & name) {
-        if (!init) initDico();
-        return dico[name];
-    }
-
-    static string getNameFromType(const StationType & type) {
-        return list_names[type];
-    }
-};
+ENUMBUILDER(StationType,
+            JOKER = 0 VIRGULE\
+            CIRCLE = 1 VIRGULE\
+            TRIANGLE = 2 VIRGULE\
+            PENTAGONE = 3 VIRGULE\
+            SQUARE = 4 VIRGULE \
+            STATIONTYPESNUMBER = 5,
+            STATIONTYPESNUMBER)
 
 
 #endif //HACKNSLPROJECT_STATIONTYPE_H

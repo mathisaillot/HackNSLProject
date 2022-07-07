@@ -22,6 +22,10 @@ public:
     static const string MAUVE_CLAIR;
     static const string JAUNE_CLAIR;
     static const string TURQUOISE;
+    static const string ROSE;
+    static const string VERT;
+    static const string BLEU;
+    static const string VIOLET;
 
 
     explicit Couleur(string couleur);

@@ -14,7 +14,7 @@
 class VisitorDessinateurStation : public AbstractVisitor<Station>  {
 protected:
     FenetreMonde * fenetre;
-    double rayon_outer_circle, scale = 0.13;
+    double rayon_outer_circle, scale = 0.13, rayon_tourist;
     int epaisseur_inner = 3;
     const Couleur couleur_outer_circle;
     const Couleur couleur_inner;
@@ -34,10 +34,10 @@ protected:
 
 public:
 
-    explicit VisitorDessinateurStation(FenetreMonde *fenetre, double rayonOuterCircle = 0.2,
-                                       const Couleur &couleurOuterCircle = (Couleur) "Black",
-                                       const Couleur &couleurInner = (Couleur) "White")
-            : fenetre(fenetre), rayon_outer_circle(rayonOuterCircle), couleur_outer_circle(couleurOuterCircle),
+    explicit VisitorDessinateurStation(FenetreMonde *fenetre, const Couleur &couleurOuterCircle = (Couleur) "Black",
+                                       const Couleur &couleurInner = (Couleur) "White", double rayonOuterCircle = 0.2,
+                                       double rayonTourist = 0.3)
+            : fenetre(fenetre), rayon_outer_circle(rayonOuterCircle), rayon_tourist(rayonTourist), couleur_outer_circle(couleurOuterCircle),
               couleur_inner(couleurInner) {}
 
     void accept(const Station &obj) const override;

@@ -4,10 +4,6 @@
 
 #include "PenColor.h"
 
-map<string, PenColor> PenColorParseur::dico;
-
-string PenColorParseur::list_names[PENNUMBER] = {
-        "blue", "pink", "green", "purple"
-};
-
-bool PenColorParseur::init = false;
+ENUMBUILDERCPP(PenColor,
+               "blue" VIRGULE "pink" VIRGULE "green" VIRGULE "purple",
+               PENCOLORNUMBER)

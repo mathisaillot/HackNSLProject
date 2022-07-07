@@ -11,6 +11,7 @@
 #include <Connexion.h>
 #include <FenetreMonde.h>
 #include <AbstractVisitor.h>
+#include <GameInstance.h>
 
 using namespace std;
 
@@ -19,12 +20,17 @@ class Monde {
 protected:
     vector<Station> liste_stations;
     vector<Connexion> liste_connexions;
+    GameInstance * instance;
 
 public:
 
     Monde();
 
     virtual ~Monde();
+
+    inline const GameInstance * getGameInstance() const{
+        return instance;
+    }
 
     inline const vector<Station> & getListeStations() const {
         return liste_stations;

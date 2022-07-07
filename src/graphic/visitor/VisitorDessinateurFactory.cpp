@@ -6,13 +6,13 @@
 
 VisitorDessinateurStation * VisitorDessinateurFactory::getVisitorStationDefault() {
     return new VisitorDessinateurStation(fenetre,
-                                         0.2,
-                                         (Couleur)"Black",
-                                         (Couleur)"White");
+                                         (Couleur) "Black",
+                                         (Couleur) "White",
+                                         0.2, 0.3);
 }
 
 VisitorDessinateurStation * VisitorDessinateurFactory::getVisitorStationDepart() {
-    return new VisitorDessinateurStation(fenetre);
+    return new VisitorDessinateurStation(fenetre, 0.3);
 }
 
 VisitorDessinateurConnexion * VisitorDessinateurFactory::getVisitorConnexionDefault() {
