@@ -35,6 +35,14 @@ Monde::Monde() {
         liste_connexions.emplace_back(json_connexions[i], liste_stations);
     }
 
+    auto & json_stations_depart = obj["stations_depart"];
+    size = json_stations_depart.size();
+
+    for (ArrayIndex i = 0; i < size; ++i) {
+        stations_depart[PenColorParseur::getTypeFromString(json_stations_depart[i]["color"].asString())] =
+                json_stations_depart[i]["id"].asInt();
+    }
+
 }
 
 Monde::~Monde() = default;

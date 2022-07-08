@@ -11,7 +11,11 @@
 #include <Connexion.h>
 
 typedef bool (&ConnexionFilter)(const Connexion &);
+typedef function<bool(const Station &)> StationFilter;
+
 bool testConnexionTamise(const Connexion & connexion);
+
+StationFilter getFilterById(int id);
 
 class VisitorDessinateurFactory {
 protected:
@@ -21,7 +25,7 @@ public:
 
     VisitorDessinateurStation * getVisitorStationDefault();
 
-    VisitorDessinateurStation * getVisitorStationDepart();
+    AbstractVisitor<Station> * getVisitorStationDepart(const Monde &monde);
 
     VisitorDessinateurConnexion * getVisitorConnexionDefault();
 

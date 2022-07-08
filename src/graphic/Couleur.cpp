@@ -14,11 +14,11 @@ using namespace std;
 /*static*/ const string Couleur::BLEU_CLAIR = "102, 255, 255";
 /*static*/ const string Couleur::MAUVE_CLAIR = "204, 153, 255";
 /*static*/ const string Couleur::JAUNE_CLAIR = "255, 255,  51";
-/*static*/ const string Couleur::TURQUOISE = " 64, 224, 208";
-/*static*/ const string Couleur::ROSE = " 222, 16, 100";
-/*static*/ const string Couleur::VERT = " 64, 157, 47";
-/*static*/ const string Couleur::BLEU = " 66, 142, 224";
-/*static*/ const string Couleur::VIOLET = " 90, 37, 120";
+/*static*/ const string Couleur::TURQUOISE = "64, 224, 208";
+/*static*/ const string Couleur::ROSE = "222,16,100";
+/*static*/ const string Couleur::VERT = "64,157,47";
+/*static*/ const string Couleur::BLEU = "66,142,224";
+/*static*/ const string Couleur::VIOLET = "90,37,120";
 
 Couleur::Couleur(string couleur) : couleur(std::move(couleur)) {}
 
@@ -28,6 +28,15 @@ Couleur::operator string() const {
 
 /*static*/ const string Couleur::toString(const Couleur &couleur) {
     return (string) couleur;
+}
+
+Couleur::Couleur(const PenColor &pen) {
+    switch (pen) {
+        case PINK: couleur = ROSE; break;
+        case GREEN: couleur = VERT; break;
+        case PURPLE: couleur = VIOLET; break;
+        default: couleur = BLEU;
+    }
 }
 
 

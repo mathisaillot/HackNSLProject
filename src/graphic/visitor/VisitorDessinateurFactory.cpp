@@ -11,8 +11,18 @@ VisitorDessinateurStation * VisitorDessinateurFactory::getVisitorStationDefault(
                                          0.2, 0.3);
 }
 
-VisitorDessinateurStation * VisitorDessinateurFactory::getVisitorStationDepart() {
-    return new VisitorDessinateurStation(fenetre, 0.3);
+AbstractVisitor<Station> * VisitorDessinateurFactory::getVisitorStationDepart(const Monde &monde) {
+
+    AbstractVisitor<Station> * visitor = getVisitorStationDefault();
+    for (int i = 0; i < PENCOLORNUMBER; ++i) {
+        auto pen = (PenColor) i;
+        visitor = new VisitorFilter<Station, StationFilter>(
+                new VisitorDessinateurStation(fenetre, (Couleur) pen),
+                visitor,
+                getFilterById(monde.getIdStationDepart(pen))
+                );
+    }
+    return visitor;
 }
 
 VisitorDessinateurConnexion * VisitorDessinateurFactory::getVisitorConnexionDefault() {
@@ -28,4 +38,8 @@ VisitorFilter<Connexion, ConnexionFilter> * VisitorDessinateurFactory::getVisito
 
 bool testConnexionTamise(const Connexion & connexion) {
     return connexion.crossTamise();
+}
+
+StationFilter getFilterById(int id) {
+    return [=](const Station & a){ return a.getIntId() == id;};
 }

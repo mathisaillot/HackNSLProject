@@ -32,7 +32,7 @@ void VisitorDessinateurStation::accept(const Station &obj) const {
     fenetre->dessineDisque(position, rayon_outer_circle, couleur_outer_circle);
 
     if (obj.isTourist()) {
-        fenetre->dessineCercle(position, rayon_tourist, couleur_outer_circle);
+        fenetre->dessineCercle(position, rayon_tourist, couleur_outer_circle, 3);
     }
 
     switch (obj.getType()) {
@@ -146,9 +146,13 @@ void VisitorDessinateurMonde::accept(const Monde &obj) const {
                               Vecteur2D<double>(XMAX, YMAX - 3), // horizontale 2
             };
 
+    fenetre->setGroupeDessin("zones");
+
     for (int i = 0; i < 16; ++i) {
         fenetre->dessineSegment(P1[i], P2[i], (Couleur) "Orange", 3);
     }
+
+    fenetre->setGroupeDessin("tamise");
 
     //Dessine la tamise
     Vecteur2D<double> tamise[] = {
@@ -164,11 +168,14 @@ void VisitorDessinateurMonde::accept(const Monde &obj) const {
         fenetre->dessineSegment(tamise[i], tamise[i + 1], (Couleur) "Blue", 10);
     }
 
+    fenetre->setGroupeDessin("connexions");
 
     //Dessine connexions
     for (auto &co: obj.getListeConnexions()) {
         co.visit(dessinateurConnexion);
     }
+
+    fenetre->setGroupeDessin("stations");
 
     //Dessine les stations
     for (auto &st: obj.getListeStations()) {

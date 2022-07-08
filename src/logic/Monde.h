@@ -21,12 +21,17 @@ protected:
     vector<Station> liste_stations;
     vector<Connexion> liste_connexions;
     GameInstance * instance;
+    int stations_depart[PENCOLORNUMBER];
 
 public:
 
     Monde();
 
     virtual ~Monde();
+
+    inline int getIdStationDepart(const PenColor & color) const {
+        return stations_depart[color];
+    }
 
     inline const GameInstance * getGameInstance() const{
         return instance;

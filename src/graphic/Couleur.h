@@ -8,6 +8,7 @@
 
 #include <string>
 #include <iostream>
+#include <PenColor.h>
 
 using namespace std;
 
@@ -29,6 +30,8 @@ public:
 
 
     explicit Couleur(string couleur);
+
+    explicit Couleur(const PenColor& pen);
 
     explicit operator string() const;
 

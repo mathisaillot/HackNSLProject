@@ -54,7 +54,7 @@ int main() {
     auto factory = VisitorDessinateurFactory(fenetre);
 
     VisitorDessinateurMonde dessinateurMonde(fenetre,
-                                             factory.getVisitorStationDefault(),
+                                             factory.getVisitorStationDepart(monde),
                                              factory.getVisitorConnexionTamise());
 
     monde.visit(&dessinateurMonde);
