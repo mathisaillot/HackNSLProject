@@ -6,6 +6,7 @@
 #include <OutilsFichiers.h>
 #include <GameInstance.h>
 #include <DessinateurMondeAWTJAVA.h>
+#include <GameState.h>
 
 #ifndef ADRESSESERVEURDEFAUT
 #define ADRESSESERVEURDEFAUT "127.0.0.1"
@@ -35,6 +36,37 @@ FenetreMonde * lanceApplicationParDefaut(const char *titre = "Application Graphi
 }
 
 int main() {
+
+    GameState state = newGameState();
+
+    int move_id = 24;
+
+    cout << "Test codage move : id = " << move_id << " no bonus" << endl;
+
+    int move_number = 0;
+
+    state[move_number] = getCodeFromID(move_id);
+
+    cout << " codage " << state[move_number] << endl;
+    cout << "check move : " << checkMove(state, move_number) << endl;
+    cout << "check bonus : " << checkBonus(state, move_number) << endl;
+    cout << "get move id : " << getIDmove(state, move_number) << endl << endl;
+
+    int bonus_id = 112;
+
+    cout << "Test codage move : id = " << move_id << " bonus : " << bonus_id << endl;
+
+    move_number ++;
+
+    state[move_number] = getCodeFromID(move_id, bonus_id);
+
+    cout << " codage " << state[move_number] << endl;
+    cout << "check move : " << checkMove(state, move_number) << endl;
+    cout << "check bonus : " << checkBonus(state, move_number) << endl;
+    cout << "get move id : " << getIDmove(state, move_number) << endl;
+    cout << "get bonus id : " << getIDbonus(state, move_number) << endl;
+
+    delete state;
 
     string file = getCheminDossierFils(getCheminDossierData(),{"gameinstance", "exemple_instance.json"});
 
