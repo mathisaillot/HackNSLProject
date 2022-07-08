@@ -68,4 +68,8 @@ void Station::addConnexion(int connexion_id) {
     liste_connexions.push_back(connexion_id);
 }
 
+const vector<int> &Station::getListeConnexions() const {
+    return liste_connexions;
+}
+
 Station::~Station() = default;

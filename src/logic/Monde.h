@@ -12,6 +12,7 @@
 #include <FenetreMonde.h>
 #include <AbstractVisitor.h>
 #include <GameInstance.h>
+#include <GameState.h>
 
 using namespace std;
 
@@ -48,6 +49,8 @@ public:
     inline unsigned long getNumberStation() const { return liste_stations.size(); }
 
     inline unsigned long getNumberConnexion() const { return liste_connexions.size(); }
+
+    int calculateAllPossibleMoves(GameState state, PenColor pen, vector<int> & list_moves);
 
     DECLAREVISITMETHOD(Monde)
 

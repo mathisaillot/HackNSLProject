@@ -41,6 +41,8 @@ public:
 
     int getCol() const;
 
+    const vector<int> &getListeConnexions() const;
+
     bool isTourist() const;
 
     StationType getType() const;

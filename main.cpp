@@ -66,6 +66,20 @@ int main() {
     cout << "get move id : " << getIDmove(state, move_number) << endl;
     cout << "get bonus id : " << getIDbonus(state, move_number) << endl;
 
+    move_id = IDMOVEPASS;
+
+    cout << "Test codage PASS : id = " << move_id << " no bonus" << endl;
+
+    move_number ++;
+
+    state[move_number] = getCodeFromID(move_id);
+
+    cout << " codage " << state[move_number] << endl;
+    cout << "check move : " << checkMove(state, move_number) << endl;
+    cout << "check bonus : " << checkBonus(state, move_number) << endl;
+    cout << "check pass : " << checkPass(state, move_number) << endl;
+    cout << "get move id : " << getIDmove(state, move_number) << endl << endl;
+
     delete state;
 
     string file = getCheminDossierFils(getCheminDossierData(),{"gameinstance", "exemple_instance.json"});
