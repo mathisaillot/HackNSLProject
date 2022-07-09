@@ -11,6 +11,14 @@
 #define IDMOVEPASS 0b0000000011111110
 #define NBITSFORMOVE 8
 
+#define CONNEXIONBITSIZE 3
+#define MASK64BIT 0b111111
+#define SHIFTRIGHT 6
+#define BITTOONE(bits, n) bits |= (uint64_t (1) << (n))
+#define FIELDBITTOONE(field, n) field[((n) >> SHIFTRIGHT)] |= (uint64_t (1) << ((n) & MASK64BIT))
+#define GETBIT(bits, n) ((bits) & (uint64_t (1) << (n)))
+#define GETFIELDBIT(field, n) ((field[((n) >> SHIFTRIGHT)]) & (uint64_t(1) << ((n) & MASK64BIT)))
+
 #include <PenColor.h>
 #include <cstdlib>
 
@@ -23,7 +31,9 @@ inline void copyGameState(GameState dst, GameState src) {
 }
 
 inline GameState newGameState() {
-    return (new uint16_t[GAMESTATESIZE]);
+    GameState state = (new uint16_t[GAMESTATESIZE]);
+    memset(state, 0, (sizeof(uint16_t) * GAMESTATESIZE));
+    return state;
 }
 
 inline bool checkMove(GameState state, int move_number) {

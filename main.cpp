@@ -39,7 +39,7 @@ int main() {
 
     GameState state = newGameState();
 
-    int move_id = 24;
+    int move_id = 0;
 
     cout << "Test codage move : id = " << move_id << " no bonus" << endl;
 
@@ -53,10 +53,11 @@ int main() {
     cout << "get move id : " << getIDmove(state, move_number) << endl << endl;
 
     int bonus_id = 112;
+    move_id = 152;
 
     cout << "Test codage move : id = " << move_id << " bonus : " << bonus_id << endl;
 
-    move_number ++;
+    move_number += MAXTURNPERROUND;
 
     state[move_number] = getCodeFromID(move_id, bonus_id);
 
@@ -80,7 +81,7 @@ int main() {
     cout << "check pass : " << checkPass(state, move_number) << endl;
     cout << "get move id : " << getIDmove(state, move_number) << endl << endl;
 
-    delete state;
+
 
     string file = getCheminDossierFils(getCheminDossierData(),{"gameinstance", "exemple_instance.json"});
 
@@ -93,6 +94,8 @@ int main() {
     cout << instance << endl;
 
     Monde monde;
+    monde.setInstance(&instance);
+
     auto & liste_stations = monde.getListeStations();
 
     auto fenetre = lanceApplicationParDefaut();
@@ -101,11 +104,12 @@ int main() {
 
     VisitorDessinateurMonde dessinateurMonde(fenetre,
                                              factory.getVisitorStationDepart(monde),
-                                             factory.getVisitorConnexionTamise());
+                                             factory.getVisitorConnexionChemin(monde, state));
 
     monde.visit(&dessinateurMonde);
 
     fenetre->listen();
     delete fenetre;
+    delete state;
     return 0;
 }

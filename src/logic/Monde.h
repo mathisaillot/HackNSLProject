@@ -30,6 +30,10 @@ public:
 
     virtual ~Monde();
 
+    inline void setInstance(GameInstance *instance) {
+        Monde::instance = instance;
+    }
+
     inline int getIdStationDepart(const PenColor & color) const {
         return stations_depart[color];
     }
@@ -50,7 +54,23 @@ public:
 
     inline unsigned long getNumberConnexion() const { return liste_connexions.size(); }
 
-    int calculateAllPossibleMoves(GameState state, PenColor pen, vector<int> & list_moves);
+    /**
+     * Calcul tous les coups possibles pour le tour actuel
+     * @param state l'état du jeu
+     * @param pen la couleur du stylos
+     * @param list_moves la liste des coups possibles à remplir
+     * @return le  numéro du tour actuel, -1 si plus de tours possibles pour ce stylos
+     */
+    int calculateAllPossibleMoves(GameState state, PenColor pen, vector<uint16_t> &list_moves) const;
+
+    /**
+     * Remplie @param connexion_bit_field avec les connexions de la couleur @param pen.
+     * @param state l'état du jeu
+     * @param pen la couleur du stylos
+     * @param connexion_bit_field le bit_field à remplir
+     * @return le nombre de coups joués pour cette couleur
+     */
+    int calculateAllConnexions(GameState state, PenColor pen, uint64_t * connexion_bit_field) const;
 
     DECLAREVISITMETHOD(Monde)
 

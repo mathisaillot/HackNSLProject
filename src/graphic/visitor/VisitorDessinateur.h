@@ -49,7 +49,7 @@ protected:
     const Couleur couleur_segment;
     int epaisseur_segment;
 public:
-    VisitorDessinateurConnexion(FenetreMonde *fenetre, const Couleur &couleurSegment, int epaisseurSegment);
+    VisitorDessinateurConnexion(FenetreMonde *fenetre, const Couleur &couleurSegment = (Couleur)"Black", int epaisseurSegment = 1);
 
     void accept(const Connexion &obj) const override;
 };

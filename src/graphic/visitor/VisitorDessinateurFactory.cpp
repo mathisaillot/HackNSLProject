@@ -36,6 +36,18 @@ VisitorFilter<Connexion, ConnexionFilter> * VisitorDessinateurFactory::getVisito
             testConnexionTamise);
 }
 
+AbstractVisitor<Connexion> *VisitorDessinateurFactory::getVisitorConnexionChemin(const Monde &monde, GameState state) {
+    AbstractVisitor<Connexion> * visitor = getVisitorConnexionDefault();
+    for (int i = 0; i < PENCOLORNUMBER; ++i) {
+
+        auto pen = (PenColor) i;
+
+        visitor = new ConnexionFilterBitField(fenetre, monde, state, pen, visitor);
+
+    }
+    return visitor;
+}
+
 bool testConnexionTamise(const Connexion & connexion) {
     return connexion.crossTamise();
 }
@@ -43,3 +55,14 @@ bool testConnexionTamise(const Connexion & connexion) {
 StationFilter getFilterById(int id) {
     return [=](const Station & a){ return a.getIntId() == id;};
 }
+
+/*ConnexionFilter createFilterWithBitField(const uint64_t bitfield[CONNEXIONBITSIZE]) {
+    return [=](const Connexion & co) -> bool {
+        if (!co.getId()) {
+            for (int j = 0; j < CONNEXIONBITSIZE; ++j) {
+                cout << bitfield[j] << endl;
+            }
+        }
+        return GETFIELDBIT(bitfield, co.getId());
+    };
+}*/

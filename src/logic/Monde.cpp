@@ -45,15 +45,7 @@ Monde::Monde() {
 
 }
 
-#define CONNEXIONBITSIZE 3
-#define MASK64BIT 63
-#define SHIFTRIGHT 6
-#define BITTOONE(bits, n) bits |= (1 << (n))
-#define FIELDBITTOONE(field, n) field[((n) >> SHIFTRIGHT)] |= (1 << ((n) & MASK64BIT))
-#define GETBIT(bits, n) ((bits) & (1 << (n)))
-#define GETFIELDBIT(field, n) ((field[((n) >> SHIFTRIGHT)]) & (1 << ((n) & MASK64BIT)))
-
-int Monde::calculateAllPossibleMoves(GameState state, PenColor pen, vector<int> & list_moves) {
+int Monde::calculateAllPossibleMoves(GameState state, PenColor pen, vector<uint16_t> &list_moves) const {
     assert(instance != nullptr);
     auto station_number = liste_stations.size();
     assert(station_number < 64);
@@ -66,19 +58,10 @@ int Monde::calculateAllPossibleMoves(GameState state, PenColor pen, vector<int> 
     int next_move = MAXTURNPERROUND;
     //On doit trouver la liste des connexions déjà utilisées
     for (int i = 0; i < PENCOLORNUMBER; ++i) {
-        for (int j = 0, move_number = i * MAXTURNPERROUND; j < MAXTURNPERROUND; ++j, ++move_number) {
-            if (checkMove(state, move_number)) {
-                if (!checkPass(state,move_number)) {
-                    uint16_t id_connexion = getIDmove(state, move_number);
-                    FIELDBITTOONE(connexion_used, id_connexion);
-                    //todo BONUS
-                }
-            } else {
-                if (i == (int)pen) {
-                    next_move = j;
-                }
-                break;
-            }
+        int moves = calculateAllConnexions(state, (PenColor)i, connexion_used);
+
+        if (i == (int)pen) {
+            next_move = moves;
         }
     }
 
@@ -143,15 +126,35 @@ int Monde::calculateAllPossibleMoves(GameState state, PenColor pen, vector<int> 
                 if (flag) continue;
 
                 //C'est tout bon on peut générer un move
-                //todo
+                list_moves.push_back(getCodeFromID(id_connexion));
 
             }
         }
     }
 
 
+    list_moves.push_back(getCodeFromID(IDMOVEPASS));
 
     return next_move + pen * MAXTURNPERROUND;
 }
+
+int Monde::calculateAllConnexions(GameState state, PenColor pen, uint64_t *connexion_bit_field) const {
+
+    for (int j = 0, move_number = pen * MAXTURNPERROUND; j < MAXTURNPERROUND; ++j, ++move_number) {
+        if (checkMove(state, move_number)) {
+            if (!checkPass(state,move_number)) {
+                uint16_t id_connexion = getIDmove(state, move_number);
+                //cout << id_connexion << " " << ((id_connexion) >> SHIFTRIGHT) << " " << (1 << ((id_connexion) & MASK64BIT)) << endl;
+
+                FIELDBITTOONE(connexion_bit_field, id_connexion);
+                //todo BONUS
+            }
+        } else {
+            return j;
+        }
+    }
+    return MAXTURNPERROUND;
+}
+
 
 Monde::~Monde() = default;
