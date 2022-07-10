@@ -7,6 +7,7 @@
 
 #include <StationType.h>
 #include <JsonLoader.hpp>
+#include <AbstractVisitor.h>
 
 using namespace Json;
 
@@ -18,6 +19,8 @@ protected:
     int color;
     static const string deviation_name, color_name[2];
 public:
+
+    virtual ~Card();
 
     Card(StationType type, bool deviation, int color) : type(type), deviation(deviation), color(color) {}
 
@@ -40,6 +43,8 @@ public:
     }
 
     static void parseDeck(vector<Card> & deck, Value & json);
+
+    DECLAREVISITMETHOD(Card)
 
 };
 

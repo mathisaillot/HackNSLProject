@@ -72,6 +72,10 @@ public:
      */
     int calculateAllConnexions(GameState state, PenColor pen, uint64_t * connexion_bit_field) const;
 
+    bool addMoveToBitField(const uint16_t & move, PenColor pen, uint64_t * connexion_bit_field) const;
+
+    void convertListMovesToBitField(const vector<Move> &list_moves, PenColor pen, uint64_t *connexion_bit_field) const;
+
     DECLAREVISITMETHOD(Monde)
 
 };

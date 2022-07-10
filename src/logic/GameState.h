@@ -22,44 +22,64 @@
 #include <PenColor.h>
 #include <cstdlib>
 
-typedef uint16_t * GameState;
+typedef uint16_t Move;
+typedef Move * GameState;
 
 constexpr int GAMESTATESIZE = MAXTURNPERROUND * PENCOLORNUMBER;
 
 inline void copyGameState(GameState dst, GameState src) {
-    memcpy(dst, src, (sizeof(uint16_t) * GAMESTATESIZE));
+    memcpy(dst, src, (sizeof(Move) * GAMESTATESIZE));
 }
 
 inline GameState newGameState() {
-    GameState state = (new uint16_t[GAMESTATESIZE]);
-    memset(state, 0, (sizeof(uint16_t) * GAMESTATESIZE));
+    auto state = (new Move[GAMESTATESIZE]);
+    memset(state, 0, (sizeof(Move) * GAMESTATESIZE));
     return state;
 }
 
+
+inline bool checkMove(const Move & move) {
+    return (move);
+}
+
 inline bool checkMove(GameState state, int move_number) {
-    return (state[move_number]);
+    return checkMove(state[move_number]);
+}
+
+inline bool checkBonus(const Move & move) {
+    return (move & MASKBONUS);
 }
 
 inline bool checkBonus(GameState state, int move_number) {
-    return (state[move_number] & MASKBONUS);
+    return checkBonus(state[move_number]);
+}
+
+inline bool checkPass(const Move & move) {
+    return (move == 1);
 }
 
 inline bool checkPass(GameState state, int move_number) {
-    return (state[move_number] == 1);
+    return checkPass(state[move_number]);
+}
+
+inline uint16_t getIDmove(const Move & move) {
+    return ((~(move)) & MASKMOVE);
 }
 
 inline uint16_t getIDmove(GameState state, int move_number) {
-    return ((~state[move_number]) & MASKMOVE);
+    return getIDmove(state[move_number]);
+}
+
+inline uint16_t getIDbonus(const Move & move) {
+    return (((~(move)) & MASKBONUS) >> NBITSFORMOVE);
 }
 
 inline uint16_t getIDbonus(GameState state, int move_number) {
-    return ((~state[move_number]) & MASKBONUS) >> NBITSFORMOVE;
+    return getIDbonus(state[move_number]);
 }
 
 inline uint16_t getCodeFromID(int id_connexion, int id_bonus = MASKMOVE) {
-    return ~(id_connexion | (id_bonus << NBITSFORMOVE));
+    return ~((id_connexion) | ((id_bonus) << NBITSFORMOVE));
 }
-
-
 
 #endif //HACKNSLPROJECT_GAMESTATE_H

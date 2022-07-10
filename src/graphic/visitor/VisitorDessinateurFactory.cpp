@@ -48,6 +48,15 @@ AbstractVisitor<Connexion> *VisitorDessinateurFactory::getVisitorConnexionChemin
     return visitor;
 }
 
+AbstractVisitor<Connexion> *
+VisitorDessinateurFactory::getVisitorConnexionChoixMoves(const Monde &monde, GameState state,
+                                                         const vector<Move> &list_moves, const PenColor &pen) {
+    return new ConnexionFilterBitField(fenetre, monde, pen,
+                                       (Couleur)"25,25,25",
+                                       list_moves,
+                                       getVisitorConnexionChemin(monde, state));
+}
+
 bool testConnexionTamise(const Connexion & connexion) {
     return connexion.crossTamise();
 }

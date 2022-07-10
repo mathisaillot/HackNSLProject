@@ -6,27 +6,6 @@
 #include "Connexion.h"
 #include <cmath>
 
-Vecteur2D<double> VisitorDessinateurStation::pentagone_corners[5] = {
-        Vecteur2D<double>(cos(M_PI / 2), sin(M_PI / 2)),
-        Vecteur2D<double>(cos(9 * M_PI / 10), sin(9 * M_PI / 10)),
-        Vecteur2D<double>(cos(13 * M_PI / 10), sin(13 * M_PI / 10)),
-        Vecteur2D<double>(cos(17 * M_PI / 10), sin(17 * M_PI / 10)),
-        Vecteur2D<double>(cos(21 * M_PI / 10), sin(21 * M_PI / 10))
-};
-
-Vecteur2D<double> VisitorDessinateurStation::square_corners[4] = {
-        Vecteur2D<double>(cos(M_PI / 4), sin(M_PI / 4)),
-        Vecteur2D<double>(cos(3 * M_PI / 4), sin(3 * M_PI / 4)),
-        Vecteur2D<double>(cos(5 * M_PI / 4), sin(5 * M_PI / 4)),
-        Vecteur2D<double>(cos(7 * M_PI / 4), sin(7 * M_PI / 4))
-};
-
-Vecteur2D<double> VisitorDessinateurStation::triangle_corners[3] = {
-        Vecteur2D<double>(cos(M_PI / 2), sin(M_PI / 2)),
-        Vecteur2D<double>(cos(7 * M_PI / 6), sin(7 * M_PI / 6)),
-        Vecteur2D<double>(cos(11 * M_PI / 6), sin(11 * M_PI / 6))
-};
-
 void VisitorDessinateurStation::accept(const Station &obj) const {
     auto position = getCenterPosition(obj);
     fenetre->dessineDisque(position, rayon_outer_circle, couleur_outer_circle);
@@ -35,55 +14,11 @@ void VisitorDessinateurStation::accept(const Station &obj) const {
         fenetre->dessineCercle(position, rayon_tourist, couleur_outer_circle, 3);
     }
 
-    switch (obj.getType()) {
-        case SQUARE:
-            dessineSquare(position);
-            break;
-        case CIRCLE:
-            dessineCircle(position);
-            break;
-        case PENTAGONE:
-            dessinePentagone(position);
-            break;
-        case TRIANGLE:
-            dessineTriangle(position);
-            break;
-        default:
-            dessineJoker(position);
-            break;
-    }
+    DessinateurStationType::dessineStationType(fenetre, obj.getType(), position, scale, couleur_inner, epaisseur_inner);
 }
 
 Vecteur2D<double> VisitorDessinateurStation::getCenterPosition(const Station &station) {
     return {station.getCol(), -station.getRow()};
-}
-
-void VisitorDessinateurStation::dessineSquare(const Vecteur2D<double> &center) const {
-    dessinePolygone(center, square_corners, 4);
-}
-
-void VisitorDessinateurStation::dessinePentagone(const Vecteur2D<double> &center) const {
-    dessinePolygone(center, pentagone_corners, 5);
-}
-
-void VisitorDessinateurStation::dessineCircle(const Vecteur2D<double> &center) const {
-    fenetre->dessineCercle(center, scale, couleur_inner, epaisseur_inner);
-}
-
-void VisitorDessinateurStation::dessineTriangle(const Vecteur2D<double> &center) const {
-    dessinePolygone(center, triangle_corners, 3);
-}
-
-void VisitorDessinateurStation::dessineJoker(const Vecteur2D<double> &center) const {
-
-}
-
-void VisitorDessinateurStation::dessinePolygone(const Vecteur2D<double> &center, const Vecteur2D<double> *corners,
-                                                int size) const {
-    for (int i = 0; i < size; ++i) {
-        fenetre->dessineSegment(center + corners[i] * scale,
-                                center + corners[(i + 1) % size] * scale, couleur_inner, epaisseur_inner);
-    }
 }
 
 void VisitorDessinateurConnexion::accept(const Connexion &obj) const {
@@ -186,4 +121,13 @@ void VisitorDessinateurMonde::accept(const Monde &obj) const {
 VisitorDessinateurMonde::~VisitorDessinateurMonde() {
  delete dessinateurConnexion;
  delete dessinateurStation;
+}
+
+void VisitorDessinateurCard::accept(const Card &obj) const {
+    DessinateurStationType::dessineStationType(fenetre, obj.getType(), position, rayon, couleur, epaisseur);
+
+    fenetre->dessineSquareSimple(position, rayon * 2, couleur, 1);
+    if (obj.isDeviation()) {
+        fenetre->dessineMessage("Deviation", position + Vecteur2D<double> (-rayon, rayon * -1.75), couleur);
+    }
 }

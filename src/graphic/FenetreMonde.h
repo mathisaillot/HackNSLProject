@@ -6,35 +6,62 @@
 #define FENETREMONDE_H_
 
 #include <string>
-#include "Vecteur2D.h"
+#include <Vecteur2D.h>
 #include <Couleur.h>
 
 using namespace std;
 
 class FenetreMonde {
+protected:
+    static Vecteur2D<double> pentagone_corners[5];
+    static Vecteur2D<double> square_corners[4];
+    static Vecteur2D<double> triangle_corners[3];
+
 public:
 
     virtual ~FenetreMonde() = default;
 
+    void
+    dessineTriangleSimple(const Vecteur2D<double> &centre, double rayon, const Couleur &couleur = (Couleur) "black",
+                          int epaisseurTraitEnPixel = 1);
 
-    virtual void dessineSegment(const Vecteur2D<double> &A1, const Vecteur2D<double> &A2, const Couleur &couleur = (Couleur) "black",
-                                int epaisseurTraitEnPixel = 1) = 0;
+    void dessineSquareSimple(const Vecteur2D<double> &centre, double rayon, const Couleur &couleur = (Couleur) "black",
+                             int epaisseurTraitEnPixel = 1);
+
+    void dessineCrossSimple(const Vecteur2D<double> &centre, double rayon, const Couleur &couleur = (Couleur) "black",
+                            int epaisseurTraitEnPixel = 1);
+
+    void
+    dessinePentagoneSimple(const Vecteur2D<double> &centre, double rayon, const Couleur &couleur = (Couleur) "black",
+                           int epaisseurTraitEnPixel = 1);
+
+    void
+    dessinePolygoneSimple(const Vecteur2D<double> &centre, const Vecteur2D<double> *corners, int size,
+                          double rayon, const Couleur &couleur, int epaisseurTraitEnPixel);
+
+
+    virtual void
+    dessineSegment(const Vecteur2D<double> &A1, const Vecteur2D<double> &A2, const Couleur &couleur = (Couleur) "black",
+                   int epaisseurTraitEnPixel = 1) = 0;
 
     virtual void
     dessineMessage(const string &message, const Vecteur2D<double> &A, const Couleur &couleur = (Couleur) "black") = 0;
 
-    virtual void dessineMessage(const char *message, const Vecteur2D<double> &A, const Couleur &couleur = (Couleur) "black") {
+    virtual void
+    dessineMessage(const char *message, const Vecteur2D<double> &A, const Couleur &couleur = (Couleur) "black") {
         dessineMessage(string(message), A, couleur);
     }
 
-    virtual void dessineCercle(const Vecteur2D<double> &centre, const double &rayon, const Couleur &couleur = (Couleur) "black",
-                               const int epaisseurTraitEnPixel = 1) = 0;
+    virtual void
+    dessineCercle(const Vecteur2D<double> &centre, const double &rayon, const Couleur &couleur = (Couleur) "black",
+                  const int epaisseurTraitEnPixel = 1) = 0;
 
     virtual void
     dessineDisque(const Vecteur2D<double> &centre, const double &rayon, const Couleur &couleur = (Couleur) "black") = 0;
 
     virtual void
-    dessinePoint(const Vecteur2D<double> &centre, const int &rayonEnPixel, const Couleur &couleur = (Couleur) "black") = 0;
+    dessinePoint(const Vecteur2D<double> &centre, const int &rayonEnPixel,
+                 const Couleur &couleur = (Couleur) "black") = 0;
 
 /**
  * TACHE : dessine le polygone plein défini par le contour sommets. couleurInterieur est la couleur de remplissage.
@@ -84,14 +111,14 @@ public:
      * @param question la question à poser
      * @return la réponse en booléen
      */
-    virtual bool questionUtilisateurBinaire(string & question) = 0;
+    virtual bool questionUtilisateurBinaire(string &question) = 0;
 
     /**
      * Permet de poser une question avec une textuelle de l'utilisateur
      * @param question la question à poser
      * @return la réponse en string
      */
-    virtual string questionUtilisateurTexte(string & question) = 0;
+    virtual string questionUtilisateurTexte(string &question) = 0;
 
     /**
      * Se synchronise avec la fenêtre

@@ -32,3 +32,5 @@ Card::operator string() const {
     return "Carte " + StationTypeParseur::getNameFromType(type) + " " + (deviation ? deviation_name + " " : "") +
     color_name[color];
 }
+
+Card::~Card() = default;

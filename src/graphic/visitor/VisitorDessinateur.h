@@ -10,6 +10,8 @@
 #include "FenetreMonde.h"
 #include "Vecteur2D.h"
 #include "Monde.h"
+#include <DessinateurStationType.h>
+#include <Card.h>
 
 class VisitorDessinateurStation : public AbstractVisitor<Station>  {
 protected:
@@ -19,18 +21,7 @@ protected:
     const Couleur couleur_outer_circle;
     const Couleur couleur_inner;
 
-    static Vecteur2D<double> pentagone_corners[5];
-    static Vecteur2D<double> square_corners[4];
-    static Vecteur2D<double> triangle_corners[3];
-
     static Vecteur2D<double> getCenterPosition(const Station & station);
-
-    void dessineSquare(const Vecteur2D<double> & center) const;
-    void dessinePentagone(const Vecteur2D<double> & center) const;
-    void dessineCircle(const Vecteur2D<double> & center) const;
-    void dessineTriangle(const Vecteur2D<double> & center) const;
-    void dessineJoker(const Vecteur2D<double> & center) const;
-    void dessinePolygone(const Vecteur2D<double> & center, const Vecteur2D<double> * corners, int size) const;
 
 public:
 
@@ -67,6 +58,25 @@ public:
                             AbstractVisitor<Connexion> *dessinateurConnexion);
 
     void accept(const Monde &obj) const override;
+};
+
+class  VisitorDessinateurCard : public AbstractVisitor<Card> {
+protected:
+    FenetreMonde * fenetre;
+    const Couleur couleur;
+    int epaisseur;
+    Vecteur2D<double> position;
+    double rayon;
+public:
+
+    ~VisitorDessinateurCard() override = default;
+
+    explicit VisitorDessinateurCard(FenetreMonde *fenetre, const Couleur &couleur = (Couleur)  "Black", int epaisseur = 5,
+                           const Vecteur2D<double> &position = Vecteur2D<double>(-2.5,-3), double rayon = 0.5) : fenetre(fenetre), couleur(couleur),
+                                                                              epaisseur(epaisseur), position(position),
+                                                                              rayon(rayon) {}
+
+    void accept(const Card &obj) const override;
 };
 
 
