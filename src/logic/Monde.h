@@ -14,7 +14,11 @@
 #include <GameInstance.h>
 #include <GameState.h>
 
+#define NOMBREZONES 13
+
 using namespace std;
+
+class GameScore;
 
 class Monde {
 
@@ -75,6 +79,11 @@ public:
     bool addMoveToBitField(const uint16_t & move, PenColor pen, uint64_t * connexion_bit_field) const;
 
     void convertListMovesToBitField(const vector<Move> &list_moves, PenColor pen, uint64_t *connexion_bit_field) const;
+
+    template<typename FONCTEUR>
+    bool extractConnexionsFromMove(const uint16_t & move, PenColor pen, FONCTEUR f) const;
+
+    GameScore * calculateScore(GameState state) const;
 
     DECLAREVISITMETHOD(Monde)
 

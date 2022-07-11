@@ -39,6 +39,8 @@ public:
 
     AbstractVisitor<Connexion> *getVisitorConnexionChoixMoves(const Monde &monde, GameState state,
                                                               const vector<Move> &list_moves, const PenColor &pen);
+
+    AbstractVisitor<Connexion> * getVisitorConnexionCrossings(const Monde &monde, const int &id_connexion);
 };
 
 class ConnexionFilterBitField : public AbstractVisitor<Connexion> {
