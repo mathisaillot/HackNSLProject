@@ -66,10 +66,13 @@ def get_connection_coord_through(concat_id):
     elif ya == yb:
         return [[x + 0.5 + min(xb, xa), ya] for x in range(0, abs(xb - xa))] + [[x + min(xb, xa), ya] for x in
                                                                                 range(1, abs(xb - xa))]
-    else:
+    elif ya < yb:
         return [[x + 0.5 + min(xb, xa), x + 0.5 + min(yb, ya)] for x in range(0, abs(xb - xa))] + [
             [x + min(xb, xa), x + min(yb, ya)] for x in range(1, abs(xb - xa))]
 
+    else : 
+        return [[-x - 0.5 + max(xb, xa), x + 0.5 + min(yb, ya)] for x in range(0, abs(xb - xa))] + [
+            [x + min(xb, xa), -x + max(yb, ya)] for x in range(1, abs(xb - xa))]
 
 def is_new_connection(connection_id):
     other_connection_id = connection_id[2:4] + connection_id[0:2]
