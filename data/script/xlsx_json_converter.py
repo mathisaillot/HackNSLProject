@@ -200,7 +200,7 @@ def process(filename):
     main_json_data['connections'] = CONNECTIONS
 
     # Write JSON
-    with open('NSLdata.json', 'w', encoding='utf-8') as f:
+    with open('../NSLdata.json', 'w', encoding='utf-8') as f:
         json.dump(main_json_data, f, indent=4)
 
 

@@ -488,19 +488,19 @@
     ],
     "stations_depart": [
         {
-            "id": 21.0,
+            "id": 21,
             "color": "pink"
         },
         {
-            "id": 13.0,
+            "id": 13,
             "color": "green"
         },
         {
-            "id": 29.0,
+            "id": 29,
             "color": "purple"
         },
         {
-            "id": 40.0,
+            "id": 40,
             "color": "blue"
         }
     ],
