@@ -86,7 +86,7 @@ $(BUILD_DIR)$(FILESEP)$(TARGET_EXEC): $(OBJS)
 # Build step for C++ source
 ifeq ($(OS),Windows_NT)
 $(BUILD_DIR)$(FILESEP)%.o: %.cpp
-	IF not exist $(dir $@) ($(MKDIR) $(dir $@))
+	IF not exist "$(dir $@)" ($(MKDIR) "$(dir $@)")
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 else
 $(BUILD_DIR)$(FILESEP)%.o: %.cpp

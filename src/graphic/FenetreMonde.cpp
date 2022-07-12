@@ -1,7 +1,7 @@
 //
 // Created by Mathis Saillot on 09/07/2022.
 //
-
+#define _USE_MATH_DEFINES
 #include "FenetreMonde.h"
 
 Vecteur2D<double> FenetreMonde::pentagone_corners[5] = {
