@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <regex>
+#include <OutilsEnum.h>
 
 using namespace std;
 
@@ -12,12 +13,23 @@ using namespace std;
  *
  */
 
+#define QUOTE(str) #str
+#define EXPAND_AND_QUOTE(str) QUOTE(str)
+
+#ifndef DATA_ROOT_RAW
+#define DATA_ROOT_RAW ../data
+#endif
+
 #ifndef DATA_ROOT
-    #define DATA_ROOT "../data"
+    #define DATA_ROOT EXPAND_AND_QUOTE(DATA_ROOT_RAW)
+#endif
+
+#ifndef FILE_SEP_RAW
+    #define FILE_SEP_RAW /
 #endif
 
 #ifndef FILE_SEP
-    #define FILE_SEP "/"
+#define FILE_SEP EXPAND_AND_QUOTE(FILE_SEP_RAW)
 #endif
 
 /**

@@ -75,7 +75,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
-CPPFLAGS := $(WFLAGS) $(CPP_VER) -c $(EXTRA_FLAGS) $(INC_FLAGS) -MMD -MP -D DATA_ROOT="\"$(ABSOLUTEPATHPREFFIX)data\"" -D FILE_SEP="\"""$(FILESEP)""\""
+CPPFLAGS := $(WFLAGS) $(CPP_VER) -c $(EXTRA_FLAGS) $(INC_FLAGS) -MMD -MP -D DATA_ROOT_RAW=$(ABSOLUTEPATHPREFFIX)data -D FILE_SEP_RAW=$(FILESEP)
 
 #LDFLAGS := -ljsoncpp
 
