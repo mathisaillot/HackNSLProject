@@ -282,9 +282,9 @@ int main() {
     auto fenetre = lanceApplicationParDefaut();
 
 
-    //applicationTestCoupsAleatoires(fenetre, monde);
+    applicationTestCoupsAleatoires(fenetre, monde);
 
-    applicationDetectionErreurCrossings(fenetre, monde);
+    //applicationDetectionErreurCrossings(fenetre, monde);
 
     //cout << "Break" << endl;
 

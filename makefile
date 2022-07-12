@@ -77,7 +77,7 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 # These files will have .d instead of .o as the output.
 CPPFLAGS := $(WFLAGS) $(CPP_VER) -c $(EXTRA_FLAGS) $(INC_FLAGS) -MMD -MP -D DATA_ROOT="\"$(ABSOLUTEPATHPREFFIX)data\"" -D FILE_SEP="\"$(FILESEP)\""
 
-LDFLAGS := -ljsoncpp
+#LDFLAGS := -ljsoncpp
 
 # The final build step.
 $(BUILD_DIR)$(FILESEP)$(TARGET_EXEC): $(OBJS)

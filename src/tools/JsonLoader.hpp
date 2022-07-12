@@ -4,12 +4,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <json/json.h>
 // lib extern
-#ifdef __APPLE__
+/*#ifdef __APPLE__
     #include <json/json.h>
 #else
     #include <jsoncpp/json/json.h>
-#endif
+#endif*/
 // lib perso
 #include "Outils.hpp"
 
