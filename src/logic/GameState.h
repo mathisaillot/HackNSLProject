@@ -21,6 +21,7 @@
 
 #include <PenColor.h>
 #include <cstdlib>
+#include <cstring>
 
 typedef uint16_t Move;
 typedef Move * GameState;

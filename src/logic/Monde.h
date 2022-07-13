@@ -13,6 +13,7 @@
 #include <AbstractVisitor.h>
 #include <GameInstance.h>
 #include <GameState.h>
+#include <cassert>
 
 #define NOMBREZONES 13
 

@@ -24,12 +24,12 @@ using namespace std;
     #define DATA_ROOT EXPAND_AND_QUOTE(DATA_ROOT_RAW)
 #endif
 
-#ifndef FILE_SEP_RAW
-    #define FILE_SEP_RAW /
-#endif
+#ifdef __APPLE__
+#define FILE_SEP "/"
 
-#ifndef FILE_SEP
-#define FILE_SEP EXPAND_AND_QUOTE(FILE_SEP_RAW)
+#else
+#define FILE_SEP "\\"
+
 #endif
 
 /**

@@ -366,7 +366,7 @@ using IStringStream =
 using OStringStream =
     std::basic_ostringstream<String::value_type, String::traits_type,
                              String::allocator_type>;
-using IStream = std::istream;
+using JSONIStream = std::istream;
 using OStream = std::ostream;
 } // namespace Json
 
@@ -374,7 +374,7 @@ using OStream = std::ostream;
 using JSONCPP_STRING = Json::String;
 using JSONCPP_ISTRINGSTREAM = Json::IStringStream;
 using JSONCPP_OSTRINGSTREAM = Json::OStringStream;
-using JSONCPP_ISTREAM = Json::IStream;
+using JSONCPP_ISTREAM = Json::JSONIStream;
 using JSONCPP_OSTREAM = Json::OStream;
 
 #endif // JSON_CONFIG_H_INCLUDED

@@ -365,7 +365,7 @@ using IStringStream =
 using OStringStream =
     std::basic_ostringstream<String::value_type, String::traits_type,
                              String::allocator_type>;
-using IStream = std::istream;
+using JSONIStream = std::istream;
 using OStream = std::ostream;
 } // namespace Json
 
@@ -373,7 +373,7 @@ using OStream = std::ostream;
 using JSONCPP_STRING = Json::String;
 using JSONCPP_ISTRINGSTREAM = Json::IStringStream;
 using JSONCPP_OSTRINGSTREAM = Json::OStringStream;
-using JSONCPP_ISTREAM = Json::IStream;
+using JSONCPP_ISTREAM = Json::JSONIStream;
 using JSONCPP_OSTREAM = Json::OStream;
 
 #endif // JSON_CONFIG_H_INCLUDED
@@ -1574,7 +1574,7 @@ public:
 
   /// \brief Parse from input stream.
   /// \see Json::operator>>(std::istream&, Json::Value&).
-  bool parse(IStream& is, Value& root, bool collectComments = true);
+  bool parse(JSONIStream& is, Value& root, bool collectComments = true);
 
   /** \brief Returns a user friendly string that list errors in the parsed
    * document.
@@ -1842,7 +1842,7 @@ public:
  * Someday we might have a real StreamReader, but for now this
  * is convenient.
  */
-bool JSON_API parseFromStream(CharReader::Factory const&, IStream&, Value* root,
+bool JSON_API parseFromStream(CharReader::Factory const&, JSONIStream&, Value* root,
                               String* errs);
 
 /** \brief Read from 'sin' into 'root'.
@@ -1869,7 +1869,7 @@ bool JSON_API parseFromStream(CharReader::Factory const&, IStream&, Value* root,
  * \throw std::exception on parse error.
  * \see Json::operator<<()
  */
-JSON_API IStream& operator>>(IStream&, Value&);
+JSON_API JSONIStream& operator>>(JSONIStream&, Value&);
 
 } // namespace Json
 

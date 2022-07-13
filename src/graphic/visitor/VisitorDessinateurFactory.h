@@ -10,6 +10,7 @@
 #include <Station.h>
 #include <Connexion.h>
 #include <GameState.h>
+#include <functional>
 
 //typedef bool (&ConnexionFilter)(const Connexion &);
 typedef function<bool(const Station &)> StationFilter;

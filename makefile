@@ -18,10 +18,12 @@ include $(PRESET_FILE)
 
 ifeq ($(OS),Windows_NT)
     FILESEP := \\
+    FILESEP2=\$(strip)
     MKDIR := mkdir
     DELETE := rd /s
 else
     FILESEP := /
+    FILESEP2 := /
     MKDIR := mkdir -p
     DELETE := rm -r
 endif
@@ -34,6 +36,7 @@ SRC_DIRS := .$(FILESEP)src
 PREFIX_TESTFILES := main
 PATHMAKEFILE := $(realpath makefile)
 ABSOLUTEPATHPREFFIX = $(PATHMAKEFILE:%makefile=%)
+ABSOLUTEPATHPREFFIX2 = $(PATHMAKEFILE:%makefile=%)
 TARGET_EXEC := $(basename $(TARGET_EXEC_FILE))
 #TARGET_EXEC := main.cpp
 
@@ -44,6 +47,7 @@ TARGET_EXEC := $(basename $(TARGET_EXEC_FILE))
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
 ifeq ($(OS),Windows_NT)
 	ABSOLUTEPATHPREFFIX := $(subst /,\,$(ABSOLUTEPATHPREFFIX))
+	ABSOLUTEPATHPREFFIX2 := $(subst /,\\,$(ABSOLUTEPATHPREFFIX2))
 	ABSOLUTEPATHPREFFIX := $(strip $(ABSOLUTEPATHPREFFIX)\ )
 	ABSSRCS := $(shell dir $(SRC_DIRS)\*.cpp /b/s | findstr /v/c:"\\$(PREFIX_TESTFILES)")
 	SRCS := $(ABSSRCS:$(ABSOLUTEPATHPREFFIX)%=.$(FILESEP)%)
@@ -66,6 +70,7 @@ DEPS := $(OBJS:.o=.d)
 ifeq ($(OS),Windows_NT)
 	INC_DIRS_WINDOWS := $(shell dir $(SRC_DIRS) /b/s/a:d)
 	INC_DIRS := $(INC_DIRS_WINDOWS:$(ABSOLUTEPATHPREFFIX)%=.$(FILESEP)%)
+	EXTRA_FLAGS += -lws2_32
 else
 	INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 endif
@@ -75,7 +80,8 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
-CPPFLAGS := $(WFLAGS) $(CPP_VER) -c $(EXTRA_FLAGS) $(INC_FLAGS) -MMD -MP -D DATA_ROOT_RAW=$(ABSOLUTEPATHPREFFIX)data -D FILE_SEP_RAW=$(FILESEP)
+CPPFLAGS := $(WFLAGS) $(CPP_VER) -c $(EXTRA_FLAGS) $(INC_FLAGS) -MMD -MP -D DATA_ROOT_RAW="$(ABSOLUTEPATHPREFFIX2)data"
+
 
 #LDFLAGS := -ljsoncpp
 
@@ -87,7 +93,7 @@ $(BUILD_DIR)$(FILESEP)$(TARGET_EXEC): $(OBJS)
 ifeq ($(OS),Windows_NT)
 $(BUILD_DIR)$(FILESEP)%.o: %.cpp
 	IF not exist "$(dir $@)" ($(MKDIR) "$(dir $@)")
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@ $(EXTRA_FLAGS)
 else
 $(BUILD_DIR)$(FILESEP)%.o: %.cpp
 	$(MKDIR) $(dir $@)

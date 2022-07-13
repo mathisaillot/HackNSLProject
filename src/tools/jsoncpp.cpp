@@ -2217,7 +2217,7 @@ void CharReaderBuilder::setDefaults(Json::Value* settings) {
 //////////////////////////////////
 // global functions
 
-bool parseFromStream(CharReader::Factory const& fact, IStream& sin, Value* root,
+bool parseFromStream(CharReader::Factory const& fact, JSONIStream& sin, Value* root,
                      String* errs) {
   OStringStream ssin;
   ssin << sin.rdbuf();
@@ -2229,7 +2229,7 @@ bool parseFromStream(CharReader::Factory const& fact, IStream& sin, Value* root,
   return reader->parse(begin, end, root, errs);
 }
 
-IStream& operator>>(IStream& sin, Value& root) {
+JSONIStream& operator>>(JSONIStream& sin, Value& root) {
   CharReaderBuilder b;
   String errs;
   bool ok = parseFromStream(b, sin, &root, &errs);
